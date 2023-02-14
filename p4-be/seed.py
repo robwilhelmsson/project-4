@@ -2,6 +2,7 @@
 from sqlalchemy.exc import SQLAlchemyError
 from app import app, db
 from models.thort import ThortModel
+from models.user import UserModel
 
 with app.app_context():
     try:
@@ -11,11 +12,14 @@ with app.app_context():
 
         print('Seeding the database!')
 
-        quote_one = ThortModel(content="Whatever you are, be a good one.", rating=6)
+        user = UserModel(username="robwilhelmsson", email='rob@rob.com', password="Password123!", author="Rob Wilhelmsson")
+        user.save()
+
+        quote_one = ThortModel(content="A hydrated team is a high rated team.", author_id=user.id)
         quote_one.save()
-        quote_two = ThortModel(content="Act as if what you do makes a difference.", rating=8)
+        quote_two = ThortModel(content="Goggles for go, sunnies for show.", author_id=user.id)
         quote_two.save()
-        quote_three = ThortModel(content="The only real mistake is the one from which we learn nothing", rating=4)
+        quote_three = ThortModel(content="If you do it, then it's done.", author_id=user.id)
         quote_three.save()
 
         print("Database seeded!")
