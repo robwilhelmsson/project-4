@@ -14,6 +14,7 @@ import MoreIcon from '@mui/icons-material/MoreVert';
 
 
 const StyledToolbar = styled(Toolbar)(({ theme }) => ({
+    background: 'transparent',
     alignItems: 'flex-start',
     paddingTop: theme.spacing(1),
     paddingBottom: theme.spacing(2),
@@ -27,7 +28,7 @@ const StyledToolbar = styled(Toolbar)(({ theme }) => ({
 function Navbar() {
     return (
         <Box sx={{ flexGrow: 1 }}>
-            <AppBar position="static">
+            <AppBar position="static" color='transparent'>
                 <StyledToolbar>
                     <IconButton
                         size="large"

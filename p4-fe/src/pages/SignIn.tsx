@@ -1,37 +1,49 @@
 
-import * as React from 'react';
-import { Avatar, Button, CssBaseline, TextField, FormControlLabel, Checkbox, Link, Grid, Box, Typography, Container } from '@mui/material';
-import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
-import { createTheme, ThemeProvider } from '@mui/material/styles';
+import * as React from 'react'
+import { useState } from 'react'
+import { Avatar, Button, CssBaseline, TextField, FormControlLabel, Checkbox, Link, Grid, Box, Typography, Container } from '@mui/material'
+import LockOutlinedIcon from '@mui/icons-material/LockOutlined'
+import { createTheme, ThemeProvider } from '@mui/material/styles'
+import { useNavigate } from 'react-router-dom'
+import axios from 'axios'
 
-
-function Copyright(props: any) {
-    return (
-        <Typography variant="body2" color="text.secondary" align="center" {...props}>
-            {'Copyright © '}
-            <Link color="inherit" href="https://mui.com/">
-                Your Website
-            </Link>{' '}
-            {new Date().getFullYear()}
-            {'.'}
-        </Typography>
-    );
-}
-
-const theme = createTheme();
+const theme = createTheme()
 
 
 
+function SignIn({ fetchUser }: { fetchUser: Function }) {
 
-function SignIn() {
-    const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
-        event.preventDefault();
-        const data = new FormData(event.currentTarget);
-        console.log({
-            email: data.get('email'),
-            password: data.get('password'),
-        });
-    };
+    const navigate = useNavigate()
+
+    const [email, setEmail] = useState("")
+    const [password, setPassword] = useState("")
+    const [error, setError] = useState("")
+
+    const refreshPage = () => {
+        window.location.reload()
+    }
+
+    const handleSignIn = async (e: React.FormEvent<HTMLFormElement>) => {
+        e.preventDefault()
+
+        try {
+            const response = await axios.post("/api/login", { email, password })
+            const token = response.data.token
+            // store the token in browser storage or state
+            if (token) {
+                localStorage.setItem("token", token)
+                // redirect the user to the protected page
+                // window.location.href = "/protected"
+                fetchUser()
+                navigate('/')
+                // refreshPage()
+            }
+
+        } catch (error) {
+            setError("Invalid credentials")
+        }
+    }
+
 
     return (
         <ThemeProvider theme={theme}>
@@ -51,7 +63,7 @@ function SignIn() {
                     <Typography component="h1" variant="h5">
                         Sign In
                     </Typography>
-                    <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1 }}>
+                    <Box component="form" onSubmit={handleSignIn} noValidate sx={{ mt: 1 }}>
                         <TextField
                             margin="normal"
                             required
@@ -61,6 +73,8 @@ function SignIn() {
                             name="email"
                             autoComplete="email"
                             autoFocus
+                            value={email}
+                            onChange={(e) => setEmail(e.target.value)}
                         />
                         <TextField
                             margin="normal"
@@ -71,6 +85,8 @@ function SignIn() {
                             type="password"
                             id="password"
                             autoComplete="current-password"
+                            value={password}
+                            onChange={(e) => setPassword(e.target.value)}
                         />
                         <FormControlLabel
                             control={<Checkbox value="remember" color="primary" />}
@@ -98,10 +114,9 @@ function SignIn() {
                         </Grid>
                     </Box>
                 </Box>
-                <Copyright sx={{ mt: 8, mb: 4 }} />
             </Container>
         </ThemeProvider>
-    );
+    )
 }
 
 export default SignIn
