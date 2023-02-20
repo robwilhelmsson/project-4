@@ -19,8 +19,8 @@ def validate_email(email):
 
 
 class UserSchema(ma.SQLAlchemyAutoSchema):
-    password = fields.String(required=True)
-    email = fields.String(required=True)
+    password = fields.String(required=True, validate=validate_password)
+    email = fields.String(required=True, validate=validate_email)
 
     class Meta:
         model = UserModel

@@ -12,7 +12,7 @@ with app.app_context():
 
         print('Seeding the database!')
 
-        user = UserModel(username="robwilhelmsson", email='rob@rob.com', password="Password123!", author="Rob Wilhelmsson")
+        user = UserModel(first_name="Rob", last_name="Wilhelmsson", username="robwilhelmsson", email='rob@rob.com', password="Password123!")
         user.save()
 
         quote_one = ThortModel(content="A hydrated team is a high rated team.", author_id=user.id)

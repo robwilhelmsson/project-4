@@ -10,10 +10,12 @@ from config.environment import secret
 class UserModel(db.Model, BaseModel):
     __tablename__ = "users"
 
+    first_name = db.Column(db.Text, nullable=False)
+    last_name = db.Column(db.Text, nullable=False)
     username = db.Column(db.Text, nullable=False, unique=True)
     email = db.Column(db.Text, nullable=False, unique=True)
     password_hash = db.Column(db.Text, nullable=True)
-    author = db.Column(db.Text, nullable=False)
+
 
     @hybrid_property
     def password(self):
