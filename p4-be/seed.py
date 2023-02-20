@@ -17,7 +17,7 @@ with app.app_context():
 
         quote_one = ThortModel(content="A hydrated team is a high rated team.", author_id=user.id)
         quote_one.save()
-        quote_two = ThortModel(content="Goggles for go, sunnies for show.", author_id=user.id)
+        quote_two = ThortModel(content="Sunnies for show, goggles for go.", author_id=user.id)
         quote_two.save()
         quote_three = ThortModel(content="If you do it, then it's done.", author_id=user.id)
         quote_three.save()

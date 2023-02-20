@@ -2,7 +2,7 @@ from http import HTTPStatus
 from marshmallow.exceptions import ValidationError
 
 from flask import Blueprint, request
-from middleware.secure_route import secure_route
+# from middleware.secure_route import secure_route
 from models.thort import ThortModel
 from models.user import UserModel
 
@@ -37,8 +37,8 @@ def signup():
     return user_schema.jsonify(user), HTTPStatus.OK
 
 
-# ? LOGIN
-@router.route("/login", methods=["POST"])
+# ? SIGN IN
+@router.route("/signin", methods=["POST"])
 def login():
     user_dictionary = request.json
     user = UserModel.query.filter_by(email=user_dictionary["email"]).first()
@@ -72,7 +72,7 @@ def get_single_thort(thort_id):
 
 # ? CREATE THORT
 @router.route("/thorts", methods=["POST"])
-@secure_route
+# @secure_route
 def create_thort():
     thort_dictionary = request.json
     try:
@@ -81,3 +81,32 @@ def create_thort():
     except ValidationError as e:
         return {"errors": e.messages, "message": "Something went wrong"}
     return thort_schema.jsonify(thort)
+
+
+# ? UPDATE THORT
+@router.route("/thorts/<int:thort_id>", methods=["PUT", "PATCH"])
+def update_tea(thort_id):
+    thort_dictionary = request.json
+    existing_thort = ThortModel.query.get(thort_id)
+    if not existing_thort:
+        return {"message": "No thort found"}, HTTPStatus.NOT_FOUND
+    try:
+        thort = thort_schema.load(
+            thort_dictionary,
+            instance=existing_thort,
+            partial=True
+        )
+        thort.save()
+    except ValidationError as e:
+        return {"errors": e.messages, "message": "Something went wrong"}
+    return thort_schema.jsonify(thort), HTTPStatus.OK
+
+
+# ? DELETE THORT
+@router.route('/thorts/<int:thort_id>', methods=["DELETE"])
+def remove_thort(thort_id):
+    thort = ThortModel.query.get(thort_id)
+    if not thort:
+        return {"message": "No thort found"}, HTTPStatus.NOT_FOUND
+    thort.delete()
+    return '', HTTPStatus.NO_CONTENT
