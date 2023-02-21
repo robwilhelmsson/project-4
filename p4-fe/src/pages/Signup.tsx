@@ -1,10 +1,10 @@
 import * as React from 'react'
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { Avatar, Button, CssBaseline, TextField, Link, Grid, Box, Typography, Container } from '@mui/material'
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined'
 import { createTheme, ThemeProvider } from '@mui/material/styles'
 import axios from 'axios'
-// import { useNavigate } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 
 import { SignupResponse } from '../interface/signup'
 
@@ -14,23 +14,52 @@ const theme = createTheme()
 
 function Signup() {
 
-    // const navigate = useNavigate()
-    
-    const [firstName, setFirstName] = useState('')
-    const [lastName, setLastName] = useState('')
-    const [username, setUsername] = useState('')
-    const [email, setEmail] = useState('')
-    const [password, setPassword] = useState('')
-    const [message, setMessage] = useState('')
+    const navigate = useNavigate()
 
-    const handleSignup = async (e: React.FormEvent<HTMLFormElement>) => {
+    const [formData, setFormData] = React.useState({
+        firstname: '',
+        lastname: '',
+        username: '',
+        email: '',
+        password: ''
+    })
+
+    const [errorData, setErrorData] = React.useState({
+        firstname: '',
+        lastname: '',
+        username: '',
+        email: '',
+        password: ''
+    })
+
+    async function handleSignup(e: React.SyntheticEvent) {
         e.preventDefault()
+        let isValid = true
+        if (Object.values(formData).some((val) => !val)) {
+            isValid = false
+        }
 
-        const response = await axios.post('/api/signup', {firstName, lastName, username, email, password})
-        
-        setMessage(response.data.message);
-        console.log(response.data.message)
-        // navigate('/signin')
+        if (!isValid) {
+            alert("Please fill all the fields!")
+            return
+        }
+
+        try {
+            await axios.post(`/api/signup`, formData)
+            navigate('/signin')
+        } catch (error: any) {
+            setErrorData(error.response.data.errors)
+        }
+    }
+
+    function handleChange(e: any) {
+        const newFormData = structuredClone(formData)
+        newFormData[e.target.name] = e.target.value
+        setFormData(newFormData)
+
+        const newErrorData = structuredClone(errorData)
+        newErrorData[e.target.name] = ''
+        setErrorData(newErrorData)
     }
 
     return (
@@ -55,27 +84,24 @@ function Signup() {
                         <Grid container spacing={2}>
                             <Grid item xs={12} sm={6}>
                                 <TextField
-                                    autoComplete="given-name"
-                                    name="firstName"
                                     required
                                     fullWidth
-                                    id="firstName"
+                                    id="firstname"
                                     label="First Name"
+                                    name="firstname"
                                     autoFocus
-                                    value={firstName}
-                                    onChange={(e) => setFirstName(e.target.value)}
+                                    onChange={handleChange}
                                 />
                             </Grid>
                             <Grid item xs={12} sm={6}>
                                 <TextField
                                     required
                                     fullWidth
-                                    id="lastName"
+                                    id="lastname"
                                     label="Last Name"
-                                    name="lastName"
+                                    name="lastname"
                                     autoComplete="family-name"
-                                    value={lastName}
-                                    onChange={(e) => setLastName(e.target.value)}
+                                    onChange={handleChange}
                                 />
                             </Grid>
                             <Grid item xs={12}>
@@ -86,9 +112,8 @@ function Signup() {
                                     label="Username"
                                     name="username"
                                     autoComplete="username"
-                                    value={username}
-                                    onChange={(e) => setUsername(e.target.value)}
-                                />
+                                    onChange={handleChange}
+                                    />
                             </Grid>
                             <Grid item xs={12}>
                                 <TextField
@@ -98,8 +123,7 @@ function Signup() {
                                     label="Email Address"
                                     name="email"
                                     autoComplete="email"
-                                    value={email}
-                                    onChange={(e) => setEmail(e.target.value)}
+                                    onChange={handleChange}
                                 />
                             </Grid>
                             <Grid item xs={12}>
@@ -111,8 +135,7 @@ function Signup() {
                                     type="password"
                                     id="password"
                                     autoComplete="new-password"
-                                    value={password}
-                                    onChange={(e) => setPassword(e.target.value)}
+                                    onChange={handleChange}
                                 />
                             </Grid>
                         </Grid>
@@ -126,7 +149,7 @@ function Signup() {
                         </Button>
                         <Grid container justifyContent="flex-end">
                             <Grid item>
-                                <Link href="#" variant="body2">
+                                <Link href="/signin" variant="body2">
                                     Already have an account? Sign in
                                 </Link>
                             </Grid>

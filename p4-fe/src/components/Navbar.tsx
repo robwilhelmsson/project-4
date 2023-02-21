@@ -11,25 +11,23 @@ import Typography from '@mui/material/Typography';
 import MenuIcon from '@mui/icons-material/Menu';
 import SearchIcon from '@mui/icons-material/Search';
 import MoreIcon from '@mui/icons-material/MoreVert';
+import { border } from '@mui/system';
 
-
-const StyledToolbar = styled(Toolbar)(({ theme }) => ({
-    background: 'transparent',
-    alignItems: 'flex-start',
-    paddingTop: theme.spacing(1),
-    paddingBottom: theme.spacing(2),
-    // Override media queries injected by theme.mixins.toolbar
-    '@media all': {
-        minHeight: 128,
-    },
-}));
-
+const toolbarStyles = {
+    title: {
+        color: 'red',
+        border: '1px solid black',
+        variant: 'h5'
+    }
+}
 
 function Navbar() {
+
+
     return (
-        <Box sx={{ flexGrow: 1 }}>
-            <AppBar position="static" color='transparent'>
-                <StyledToolbar>
+        // <Box sx={{ flexGrow: 1 }}>
+            <AppBar position="static" color='transparent' elevation={1}>
+                <Toolbar>
                     <IconButton
                         size="large"
                         edge="start"
@@ -40,10 +38,11 @@ function Navbar() {
                         <MenuIcon />
                     </IconButton>
                     <Typography
+                        style={toolbarStyles.title}
                         variant="h5"
                         noWrap
                         component="div"
-                        sx={{ flexGrow: 1, alignSelf: 'flex-end' }}
+                        sx={{ flexGrow: 1 }}
                     >
                         MUI
                     </Typography>
@@ -58,9 +57,9 @@ function Navbar() {
                     >
                         <MoreIcon />
                     </IconButton>
-                </StyledToolbar>
+                </Toolbar>
             </AppBar>
-        </Box>
+        // </Box>
     );
 }
 

@@ -14,37 +14,45 @@ const theme = createTheme()
 function SignIn({ fetchUser }: { fetchUser: Function }) {
 
     const navigate = useNavigate()
+    const [errorMessage, setErrorMessage] = React.useState('')
 
-    const [email, setEmail] = useState("")
-    const [password, setPassword] = useState("")
-    const [error, setError] = useState("")
+    const [formData, setFormData] = React.useState({
+        email: '',
+        password: ''
+    })
 
     const refreshPage = () => {
         window.location.reload()
     }
 
-    const handleSignIn = async (e: React.FormEvent<HTMLFormElement>) => {
+    async function handleSignIn(e: React.SyntheticEvent) {
         e.preventDefault()
-
         try {
-            const response = await axios.post("/api/login", { email, password })
-            const token = response.data.token
-            // store the token in browser storage or state
+            const { data } = await axios.post(`/api/signin`, formData)
+            const token = data.token
+
             if (token) {
-                localStorage.setItem("token", token)
-                // redirect the user to the protected page
-                // window.location.href = "/protected"
+                localStorage.setItem('token', token)
                 fetchUser()
                 navigate('/')
-                // refreshPage()
+                refreshPage()
+            } else {
+                alert("Incorrect login details!")
+                setErrorMessage("Invalid login details")
             }
 
-        } catch (error) {
-            setError("Invalid credentials")
+        } catch (error: any) {
+            console.log(error)
+            setErrorMessage(error.response.data.message)
         }
     }
 
-
+    function handleChange(e: any) {
+        const newFormData = structuredClone(formData)
+        newFormData[e.target.name] = e.target.value
+        setFormData(newFormData)
+        setErrorMessage('')
+    }
     return (
         <ThemeProvider theme={theme}>
             <Container component="main" maxWidth="xs">
@@ -73,8 +81,8 @@ function SignIn({ fetchUser }: { fetchUser: Function }) {
                             name="email"
                             autoComplete="email"
                             autoFocus
-                            value={email}
-                            onChange={(e) => setEmail(e.target.value)}
+                            value={formData.email}
+                            onChange={handleChange}
                         />
                         <TextField
                             margin="normal"
@@ -85,8 +93,8 @@ function SignIn({ fetchUser }: { fetchUser: Function }) {
                             type="password"
                             id="password"
                             autoComplete="current-password"
-                            value={password}
-                            onChange={(e) => setPassword(e.target.value)}
+                            value={formData.password}
+                            onChange={handleChange}
                         />
                         <FormControlLabel
                             control={<Checkbox value="remember" color="primary" />}
@@ -106,8 +114,8 @@ function SignIn({ fetchUser }: { fetchUser: Function }) {
                                     Forgot password?
                                 </Link>
                             </Grid>
-                            <Grid item>
-                                <Link href="#" variant="body2">
+                            <Grid item xs>
+                                <Link href="/signup" variant="body2">
                                     {"Don't have an account? Sign Up"}
                                 </Link>
                             </Grid>
