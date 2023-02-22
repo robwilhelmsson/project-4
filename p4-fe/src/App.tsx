@@ -16,13 +16,13 @@ import "./styles/style.css"
 const theme = createTheme({
     palette: {
         primary: {
-            main: '#537974'
+            main: '#2c4e48'
         }
     },
     typography: {
         fontFamily: [
+            'Bitter',
             'Raleway',
-            'Cabin',
         ].join(',')
     }
 })
