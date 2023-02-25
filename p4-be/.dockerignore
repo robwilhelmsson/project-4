@@ -1,0 +1,26 @@
+# flyctl launch added from p4-fe/.gitignore
+# Logs
+p4-fe/**/logs
+p4-fe/**/*.log
+p4-fe/**/npm-debug.log*
+p4-fe/**/yarn-debug.log*
+p4-fe/**/yarn-error.log*
+p4-fe/**/pnpm-debug.log*
+p4-fe/**/lerna-debug.log*
+
+p4-fe/**/node_modules
+p4-fe/**/dist
+p4-fe/**/dist-ssr
+p4-fe/**/*.local
+
+# Editor directories and files
+p4-fe/**/.vscode/*
+!p4-fe/**/.vscode/extensions.json
+p4-fe/**/.idea
+p4-fe/**/.DS_Store
+p4-fe/**/*.suo
+p4-fe/**/*.ntvs*
+p4-fe/**/*.njsproj
+p4-fe/**/*.sln
+p4-fe/**/*.sw?
+fly.toml
