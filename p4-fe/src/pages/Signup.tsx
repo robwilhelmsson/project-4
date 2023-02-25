@@ -5,7 +5,7 @@ import LockOutlinedIcon from '@mui/icons-material/LockOutlined'
 import { createTheme, ThemeProvider } from '@mui/material/styles'
 import axios from 'axios'
 import { useNavigate } from 'react-router-dom'
-
+import { baseUrl } from '../config'
 
 function Signup() {
 
@@ -40,7 +40,7 @@ function Signup() {
         }
 
         try {
-            await axios.post(`/api/signup`, formData)
+            await axios.post(`${baseUrl}/signup`, formData)
             navigate('/signin')
         } catch (error: any) {
             setErrorData(error.response.data.errors)

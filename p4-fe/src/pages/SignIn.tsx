@@ -6,6 +6,7 @@ import LockOutlinedIcon from '@mui/icons-material/LockOutlined'
 import { createTheme, ThemeProvider } from '@mui/material/styles'
 import { useNavigate } from 'react-router-dom'
 import axios from 'axios'
+import { baseUrl } from '../config'
 
 const theme = createTheme()
 
@@ -28,7 +29,7 @@ function SignIn({ fetchUser }: { fetchUser: Function }) {
     async function handleSignIn(e: React.SyntheticEvent) {
         e.preventDefault()
         try {
-            const { data } = await axios.post(`/api/signin`, formData)
+            const { data } = await axios.post(`${baseUrl}/signin`, formData)
             const token = data.token
 
             if (token) {
