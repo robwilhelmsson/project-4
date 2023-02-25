@@ -6,27 +6,22 @@ import { createTheme, ThemeProvider } from '@mui/material/styles'
 import axios from 'axios'
 import { useNavigate } from 'react-router-dom'
 
-import { SignupResponse } from '../interface/signup'
-
-
-const theme = createTheme()
-
 
 function Signup() {
 
     const navigate = useNavigate()
 
     const [formData, setFormData] = React.useState({
-        firstname: '',
-        lastname: '',
+        first_name: '',
+        last_name: '',
         username: '',
         email: '',
         password: ''
     })
 
     const [errorData, setErrorData] = React.useState({
-        firstname: '',
-        lastname: '',
+        first_name: '',
+        last_name: '',
         username: '',
         email: '',
         password: ''
@@ -63,101 +58,91 @@ function Signup() {
     }
 
     return (
-        <ThemeProvider theme={theme}>
-            <Container component="main" maxWidth="xs">
-                <CssBaseline />
-                <Box
-                    sx={{
-                        marginTop: 8,
-                        display: 'flex',
-                        flexDirection: 'column',
-                        alignItems: 'center',
-                    }}
-                >
-                    <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}>
-                        <LockOutlinedIcon />
-                    </Avatar>
-                    <Typography component="h1" variant="h5">
-                        Sign up
-                    </Typography>
-                    <Box component="form" noValidate onSubmit={handleSignup} sx={{ mt: 3 }}>
-                        <Grid container spacing={2}>
-                            <Grid item xs={12} sm={6}>
-                                <TextField
-                                    required
-                                    fullWidth
-                                    id="firstname"
-                                    label="First Name"
-                                    name="firstname"
-                                    autoFocus
-                                    onChange={handleChange}
-                                />
-                            </Grid>
-                            <Grid item xs={12} sm={6}>
-                                <TextField
-                                    required
-                                    fullWidth
-                                    id="lastname"
-                                    label="Last Name"
-                                    name="lastname"
-                                    autoComplete="family-name"
-                                    onChange={handleChange}
-                                />
-                            </Grid>
-                            <Grid item xs={12}>
-                                <TextField
-                                    required
-                                    fullWidth
-                                    id="username"
-                                    label="Username"
-                                    name="username"
-                                    autoComplete="username"
-                                    onChange={handleChange}
-                                    />
-                            </Grid>
-                            <Grid item xs={12}>
-                                <TextField
-                                    required
-                                    fullWidth
-                                    id="email"
-                                    label="Email Address"
-                                    name="email"
-                                    autoComplete="email"
-                                    onChange={handleChange}
-                                />
-                            </Grid>
-                            <Grid item xs={12}>
-                                <TextField
-                                    required
-                                    fullWidth
-                                    name="password"
-                                    label="Password"
-                                    type="password"
-                                    id="password"
-                                    autoComplete="new-password"
-                                    onChange={handleChange}
-                                />
-                            </Grid>
+        <Container maxWidth="xs" sx={{ maxHeight: 700, backgroundColor: '#e6c764', borderRadius: '20px', boxShadow: '3px 5px 15px #254741' }}>
+            <Box sx={{ marginTop: 4, display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+                <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}>
+                    <LockOutlinedIcon />
+                </Avatar>
+                <Typography component="h1" variant="h5">
+                    Sign up
+                </Typography>
+                <Box component="form" noValidate onSubmit={handleSignup} sx={{ mt: 3 }}>
+                    <Grid container spacing={2}>
+                        <Grid item xs={12} sm={6}>
+                            <TextField
+                                required
+                                fullWidth
+                                id="first_name"
+                                label="First Name"
+                                name="first_name"
+                                autoFocus
+                                onChange={handleChange}
+                            />
                         </Grid>
-                        <Button
-                            type="submit"
-                            fullWidth
-                            variant="contained"
-                            sx={{ mt: 3, mb: 2 }}
-                        >
-                            Sign Up
-                        </Button>
-                        <Grid container justifyContent="flex-end">
-                            <Grid item>
-                                <Link href="/signin" variant="body2">
-                                    Already have an account? Sign in
-                                </Link>
-                            </Grid>
+                        <Grid item xs={12} sm={6}>
+                            <TextField
+                                required
+                                fullWidth
+                                id="last_name"
+                                label="Last Name"
+                                name="last_name"
+                                autoComplete="family-name"
+                                onChange={handleChange}
+                            />
                         </Grid>
-                    </Box>
+                        <Grid item xs={12}>
+                            <TextField
+                                required
+                                fullWidth
+                                id="username"
+                                label="Username"
+                                name="username"
+                                autoComplete="username"
+                                onChange={handleChange}
+                            />
+                        </Grid>
+                        <Grid item xs={12}>
+                            <TextField
+                                required
+                                fullWidth
+                                id="email"
+                                label="Email Address"
+                                name="email"
+                                autoComplete="email"
+                                onChange={handleChange}
+                            />
+                        </Grid>
+                        <Grid item xs={12}>
+                            <TextField
+                                required
+                                fullWidth
+                                name="password"
+                                label="Password"
+                                type="password"
+                                id="password"
+                                autoComplete="new-password"
+                                onChange={handleChange}
+                            />
+                        </Grid>
+                    </Grid>
+                    <Button
+                        type="submit"
+                        fullWidth
+                        variant="contained"
+                        sx={{ mt: 3, mb: 2 }}
+                    >
+                        Sign Up
+                    </Button>
+                    <Grid container justifyContent="flex-end">
+                        <Grid item mb={2}>
+                            <Link href="/signin" variant="body2">
+                                Already have an account? Sign in
+                            </Link>
+                        </Grid>
+                    </Grid>
                 </Box>
-            </Container>
-        </ThemeProvider>
+            </Box>
+        </Container>
     )
 }
 

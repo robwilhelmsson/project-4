@@ -55,7 +55,7 @@ function SignIn({ fetchUser }: { fetchUser: Function }) {
     }
     return (
         <ThemeProvider theme={theme}>
-            <Container component="main" maxWidth="xs">
+            <Container component="main" maxWidth="xs" sx={{ backgroundColor: 'red' }}>
                 <CssBaseline />
                 <Box
                     sx={{

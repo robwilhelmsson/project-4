@@ -30,7 +30,7 @@ const theme = createTheme({
 // #e6c764 - yellow
 // #2c5b53 - darker green (button)
 // #537974 - green sky
-
+// #e4f4f2 - white
 function App() {
 
     const [user, setUser] = useState<null | IUser>(null)

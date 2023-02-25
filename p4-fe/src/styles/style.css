@@ -9,3 +9,8 @@ main {
     background-repeat: no-repeat;
     background-size: cover;
 }
+
+ul.MuiMenu-list {
+    padding: 0px;
+}
+
