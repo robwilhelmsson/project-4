@@ -43,7 +43,7 @@ function Navbar() {
                             <Link to='/thorts' style={NavbarStyles.links}>ALL THORTS</Link>
                         </MenuItem>
                         <MenuItem sx={{ ...NavbarStyles.menuItem }}>
-                            <Link to='' style={NavbarStyles.links}>CREATE</Link>
+                            <Link to='/create' style={NavbarStyles.links}>CREATE</Link>
                         </MenuItem>
                         <MenuItem sx={{ ...NavbarStyles.menuItem }}>
                             <Link to='/signin' style={NavbarStyles.links}>SIGN IN</Link>
@@ -55,22 +55,24 @@ function Navbar() {
                 </Box>
                 {/* Large Screen */}
                 <Box sx={{ flexGrow: 1, display: { md: 'flex', xs: 'none' }, justifyContent: 'flex-end', mr: 20 }}>
-                    <Typography component={Link} to='thorts' sx={{ ...NavbarStyles.item }}>
+                    <Typography component={Link} to='/thorts' sx={{ ...NavbarStyles.item }}>
                         ALL THORTS
                     </Typography>
-                    <Typography style={NavbarStyles.item}>
+                    <Typography component={Link} to='/create' sx={{ ...NavbarStyles.item }}>
                         CREATE
                     </Typography>
                 </Box>
                 <Box sx={{ flexGrow: 1, display: { md: 'flex', xs: 'none' }, justifyContent: 'flex-end' }}>
-                    {/* <Typography style={navbarStyles.item} sx={{ mr: 4 }}>
-                        BASKET
-                    </Typography> */}
-                    <Typography component={Link} to='signin' sx={{ ...NavbarStyles.item }}>
+                    <Typography component={Link} to='/signin' sx={{ ...NavbarStyles.item }}>
                         SIGN IN
                     </Typography>
                 </Box>
-                <Button component={Link} to='signup' variant='contained' sx={{ ...NavbarStyles.btn, display: { md: 'flex', xs: 'none' } }}>
+                <Button
+                    component={Link}
+                    to='/signup'
+                    variant='contained'
+                    sx={{ ...NavbarStyles.btn, display: { md: 'flex', xs: 'none' } }}
+                >
                     SIGNUP
                 </Button>
             </Toolbar>

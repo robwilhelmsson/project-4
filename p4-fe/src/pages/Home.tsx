@@ -27,25 +27,30 @@ function Home() {
 
     return (
         <Container maxWidth='xs'>
-            <Box sx={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center' }}>
-                <Typography style={HomeStyles.title}>
+            <Box sx={{ ...HomeStyles.titlebox }}>
+                <Typography sx={{ ...HomeStyles.title }}>
                     one time
                 </Typography>
-                <Typography style={HomeStyles.title}>
+                <Typography sx={{ ...HomeStyles.title }}>
                     thort
                 </Typography>
             </Box>
-            <Box style={HomeStyles.card} sx={{ display: 'flex', flexDirection: 'column' }}>
+            <Box sx={{ ...HomeStyles.card }}>
                 <Box sx={{ flexGrow: 5 }}>
                     <Typography style={HomeStyles.author}>
                         {quote.author}
                     </Typography>
-                    <Typography style={HomeStyles.text}>
+                    <Typography sx={{ ...HomeStyles.text }}>
                         {quote.content}
                     </Typography>
                 </Box>
                 <Box sx={{ flexGrow: 0 }}>
-                    <Button onClick={handleClick} variant='contained' style={HomeStyles.btn} disableElevation>
+                    <Button
+                        onClick={handleClick} 
+                        variant='contained' 
+                        style={HomeStyles.btn}
+                        disableElevation
+                        >
                         ANOTHER THORT
                     </Button>
                 </Box>

@@ -1,4 +1,5 @@
 
+
 import React, { useState, useEffect } from "react"
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'
 import axios from "axios"
@@ -7,11 +8,13 @@ import { createTheme, ThemeProvider } from "@mui/material"
 import Navbar from "./components/Navbar"
 import Home from "./pages/Home"
 import Thorts from "./pages/Thorts"
+import Create from "./pages/Create"
 import SignIn from "./pages/SignIn"
 import Signup from "./pages/Signup"
 import { IUser } from './interface/users'
 
 import "./styles/style.css"
+
 
 const theme = createTheme({
     palette: {
@@ -31,6 +34,7 @@ const theme = createTheme({
 // #2c5b53 - darker green (button)
 // #537974 - green sky
 // #e4f4f2 - white
+
 function App() {
 
     const [user, setUser] = useState<null | IUser>(null)
@@ -58,6 +62,7 @@ function App() {
                     <Routes>
                         <Route path="/" element={<Home />} />
                         <Route path="/thorts" element={<Thorts />} />
+                        <Route path="/create" element={<Create />} />
                         <Route path="/signin" element={<SignIn fetchUser={fetchUser} />} />
                         <Route path="/signup" element={<Signup />} />
                     </Routes>

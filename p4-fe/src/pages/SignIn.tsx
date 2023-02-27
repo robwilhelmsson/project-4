@@ -8,7 +8,7 @@ import { useNavigate } from 'react-router-dom'
 import axios from 'axios'
 import { baseUrl } from '../config'
 
-const theme = createTheme()
+import { SignStyles } from './SignStyles'
 
 
 
@@ -55,76 +55,58 @@ function SignIn({ fetchUser }: { fetchUser: Function }) {
         setErrorMessage('')
     }
     return (
-        <ThemeProvider theme={theme}>
-            <Container component="main" maxWidth="xs" sx={{ backgroundColor: 'red' }}>
-                <CssBaseline />
-                <Box
-                    sx={{
-                        marginTop: 8,
-                        display: 'flex',
-                        flexDirection: 'column',
-                        alignItems: 'center',
-                    }}
-                >
-                    <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}>
-                        <LockOutlinedIcon />
-                    </Avatar>
-                    <Typography component="h1" variant="h5">
-                        Sign In
-                    </Typography>
-                    <Box component="form" onSubmit={handleSignIn} noValidate sx={{ mt: 1 }}>
-                        <TextField
-                            margin="normal"
-                            required
-                            fullWidth
-                            id="email"
-                            label="Email Address"
-                            name="email"
-                            autoComplete="email"
-                            autoFocus
-                            value={formData.email}
-                            onChange={handleChange}
-                        />
-                        <TextField
-                            margin="normal"
-                            required
-                            fullWidth
-                            name="password"
-                            label="Password"
-                            type="password"
-                            id="password"
-                            autoComplete="current-password"
-                            value={formData.password}
-                            onChange={handleChange}
-                        />
-                        <FormControlLabel
-                            control={<Checkbox value="remember" color="primary" />}
-                            label="Remember me"
-                        />
-                        <Button
-                            type="submit"
-                            fullWidth
-                            variant="contained"
-                            sx={{ mt: 3, mb: 2 }}
-                        >
-                            Sign In
-                        </Button>
-                        <Grid container>
-                            <Grid item xs>
-                                <Link href="#" variant="body2">
-                                    Forgot password?
-                                </Link>
-                            </Grid>
-                            <Grid item xs>
-                                <Link href="/signup" variant="body2">
-                                    {"Don't have an account? Sign Up"}
-                                </Link>
-                            </Grid>
+        <Container maxWidth="xs">
+            <Box sx={{ ...SignStyles.mainbox }}>
+                <Avatar sx={{ ...SignStyles.avatar }}>
+                    <LockOutlinedIcon />
+                </Avatar>
+                <Typography sx={{...SignStyles.title}}>
+                    SIGN IN
+                </Typography>
+                <Box component="form" noValidate onSubmit={handleSignIn} sx={{ m: 3 }}>
+                    <Grid container spacing={2}>
+                        <Grid item xs={12}>
+                            <TextField
+                                required
+                                fullWidth
+                                id="email"
+                                label="Email Address"
+                                name="email"
+                                autoComplete="email"
+                                onChange={handleChange}
+                            />
                         </Grid>
-                    </Box>
+                        <Grid item xs={12}>
+                            <TextField
+                                required
+                                fullWidth
+                                name="password"
+                                label="Password"
+                                type="password"
+                                id="password"
+                                autoComplete="new-password"
+                                onChange={handleChange}
+                            />
+                        </Grid>
+                    </Grid>
+                    <Button
+                        type="submit"
+                        fullWidth
+                        variant="contained"
+                        sx={{ ...SignStyles.btn }}
+                    >
+                        Sign In
+                    </Button>
+                    <Grid container justifyContent="flex-end">
+                        <Grid item mb={2}>
+                            <Link href="/signup" variant="body2" fontFamily='Raleway'>
+                                No Account? Sign Up
+                            </Link>
+                        </Grid>
+                    </Grid>
                 </Box>
-            </Container>
-        </ThemeProvider>
+            </Box>
+        </Container>
     )
 }
 

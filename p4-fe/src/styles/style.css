@@ -14,3 +14,10 @@ ul.MuiMenu-list {
     padding: 0px;
 }
 
+label.MuiInputLabel-root {
+    font-family: 'Raleway';
+}
+
+input.MuiInputBase-input {
+    font-family: 'Raleway';
+}

@@ -1,11 +1,12 @@
 import * as React from 'react'
-import { useState, useEffect } from 'react'
-import { Avatar, Button, CssBaseline, TextField, Link, Grid, Box, Typography, Container } from '@mui/material'
+import { Avatar, Button, TextField, Link, Grid, Box, Typography, Container } from '@mui/material'
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined'
-import { createTheme, ThemeProvider } from '@mui/material/styles'
 import axios from 'axios'
 import { useNavigate } from 'react-router-dom'
 import { baseUrl } from '../config'
+
+
+import { SignStyles } from './SignStyles'
 
 function Signup() {
 
@@ -57,16 +58,17 @@ function Signup() {
         setErrorData(newErrorData)
     }
 
+
     return (
-        <Container maxWidth="xs" sx={{ maxHeight: 700, backgroundColor: '#e6c764', borderRadius: '20px', boxShadow: '3px 5px 15px #254741' }}>
-            <Box sx={{ marginTop: 4, display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-                <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}>
+        <Container maxWidth="xs">
+            <Box sx={{ ...SignStyles.mainbox }}>
+                <Avatar sx={{ ...SignStyles.avatar }}>
                     <LockOutlinedIcon />
                 </Avatar>
-                <Typography component="h1" variant="h5">
-                    Sign up
+                <Typography sx={{...SignStyles.title}}>
+                    SIGN UP
                 </Typography>
-                <Box component="form" noValidate onSubmit={handleSignup} sx={{ mt: 3 }}>
+                <Box component="form" noValidate onSubmit={handleSignup} sx={{ m: 3 }}>
                     <Grid container spacing={2}>
                         <Grid item xs={12} sm={6}>
                             <TextField
@@ -86,7 +88,6 @@ function Signup() {
                                 id="last_name"
                                 label="Last Name"
                                 name="last_name"
-                                autoComplete="family-name"
                                 onChange={handleChange}
                             />
                         </Grid>
@@ -97,7 +98,6 @@ function Signup() {
                                 id="username"
                                 label="Username"
                                 name="username"
-                                autoComplete="username"
                                 onChange={handleChange}
                             />
                         </Grid>
@@ -108,7 +108,6 @@ function Signup() {
                                 id="email"
                                 label="Email Address"
                                 name="email"
-                                autoComplete="email"
                                 onChange={handleChange}
                             />
                         </Grid>
@@ -120,7 +119,6 @@ function Signup() {
                                 label="Password"
                                 type="password"
                                 id="password"
-                                autoComplete="new-password"
                                 onChange={handleChange}
                             />
                         </Grid>
@@ -129,13 +127,13 @@ function Signup() {
                         type="submit"
                         fullWidth
                         variant="contained"
-                        sx={{ mt: 3, mb: 2 }}
+                        sx={{...SignStyles.btn }}
                     >
                         Sign Up
                     </Button>
                     <Grid container justifyContent="flex-end">
                         <Grid item mb={2}>
-                            <Link href="/signin" variant="body2">
+                            <Link href="/signin" variant="body2" fontFamily='Raleway'>
                                 Already have an account? Sign in
                             </Link>
                         </Grid>

@@ -1,5 +1,11 @@
 
 export const HomeStyles = {
+    titlebox: {
+        display: 'flex', 
+        flexDirection: 'column', 
+        justifyContent: 'center', 
+        alignItems: 'center'
+    },
     title: {
         color: '#e4f4f2',
         fontFamily: 'Bitter',
@@ -33,6 +39,6 @@ export const HomeStyles = {
         fontFamily: 'Raleway',
         fontWeight: '300',
         color: '#e4f4f2',
-        borderRadius: 0
-    }
+        borderRadius: '3px'
+    },
 }
