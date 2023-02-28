@@ -55,5 +55,5 @@ export const NavbarStyles = {
         fontSize: '12px',
         textDecoration: 'none'
     }
-    
+
 }

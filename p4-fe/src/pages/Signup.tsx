@@ -65,7 +65,7 @@ function Signup() {
                 <Avatar sx={{ ...SignStyles.avatar }}>
                     <LockOutlinedIcon />
                 </Avatar>
-                <Typography sx={{...SignStyles.title}}>
+                <Typography sx={{ ...SignStyles.title }}>
                     SIGN UP
                 </Typography>
                 <Box component="form" noValidate onSubmit={handleSignup} sx={{ m: 3 }}>
@@ -127,7 +127,7 @@ function Signup() {
                         type="submit"
                         fullWidth
                         variant="contained"
-                        sx={{...SignStyles.btn }}
+                        sx={{ ...SignStyles.btn }}
                     >
                         Sign Up
                     </Button>

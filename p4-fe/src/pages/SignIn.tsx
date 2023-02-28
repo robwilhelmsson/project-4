@@ -60,7 +60,7 @@ function SignIn({ fetchUser }: { fetchUser: Function }) {
                 <Avatar sx={{ ...SignStyles.avatar }}>
                     <LockOutlinedIcon />
                 </Avatar>
-                <Typography sx={{...SignStyles.title}}>
+                <Typography sx={{ ...SignStyles.title }}>
                     SIGN IN
                 </Typography>
                 <Box component="form" noValidate onSubmit={handleSignIn} sx={{ m: 3 }}>

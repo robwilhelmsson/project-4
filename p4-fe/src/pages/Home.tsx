@@ -46,11 +46,11 @@ function Home() {
                 </Box>
                 <Box sx={{ flexGrow: 0 }}>
                     <Button
-                        onClick={handleClick} 
-                        variant='contained' 
+                        onClick={handleClick}
+                        variant='contained'
                         style={HomeStyles.btn}
                         disableElevation
-                        >
+                    >
                         ANOTHER THORT
                     </Button>
                 </Box>

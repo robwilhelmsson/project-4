@@ -66,11 +66,11 @@ function Create() {
                     rows={4}
                     sx={{ ...CreateStyles.textField }}
                 />
-                <Button 
-                    variant='contained' 
-                    style={CreateStyles.btn} 
+                <Button
+                    variant='contained'
+                    style={CreateStyles.btn}
                     disableElevation
-                    >
+                >
                     ADD TO DATABASE
                 </Button>
             </Box>
